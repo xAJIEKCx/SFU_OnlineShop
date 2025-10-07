@@ -11,10 +11,7 @@
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredIdentifiers">
         <list>
-          <option value="main.newshape" />
-          <option value="main.*" />
-          <option value="cv2" />
-          <option value="telegram.KeyboardButton" />
+          <option value="dbsqlite3" />
         </list>
       </option>
     </inspection_tool>
