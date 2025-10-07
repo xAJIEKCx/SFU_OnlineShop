@@ -1,27 +1,16 @@
-// Получаем товары с сервера
-fetch("/api/products")
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById("products");
-    data.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}" />
-        <h3>${p.name}</h3>
-        <p>${p.price} ₽</p>
-        <button onclick="addToCart('${p.name}')">🛒 В корзину</button>
-      `;
-      container.appendChild(card);
-    });
-  });
+// Регистрация пользователя
+await fetch("/api/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ telegram_id: Telegram.WebApp.initDataUnsafe.user.id, name: Telegram.WebApp.initDataUnsafe.user.first_name })
+})
 
-let cart = [];
-
-function addToCart(name) {
-  cart.push(name);
-}
-
-document.getElementById("checkout").addEventListener("click", () => {
-  Telegram.WebApp.sendData(JSON.stringify(cart)); // 📤 отправляем заказ обратно боту
-});
+// Оформление заказа
+await fetch("/api/order", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    telegram_id: Telegram.WebApp.initDataUnsafe.user.id,
+    items: [{ product_id: 1, qty: 2 }]
+  })
+})
