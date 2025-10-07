@@ -1,17 +1,228 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Магазин пиццы 🍕</title>
-  <link rel="stylesheet" href="../../style.css" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скандинавские бургеры</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 16px;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-weight {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .item-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .price-from {
+            font-size: 12px;
+            color: #a0aec0;
+            margin-right: 4px;
+        }
+
+        .navigation {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-button {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 0 5px;
+        }
+
+        .nav-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+
+        .nav-button:active {
+            transform: translateY(0);
+        }
+
+        /* Адаптивность для маленьких экранов */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .menu-item {
+                padding: 15px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-button {
+                margin: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>🍣 Наши товары</h1>
-  <div id="products"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Бургерная</h1>
+            <div class="subtitle">Скандинавские бургеры</div>
+        </div>
 
-  <button id="checkout">✅ Оформить заказ</button>
+        <div class="menu-items">
+            <div class="menu-item">
+                <div class="item-name">Скандинавский бургер</div>
+                <div class="item-details">
+                    <span class="item-weight">283 г</span>
+                    <span class="item-price"><span class="price-from">от</span> 269 ₽</span>
+                </div>
+            </div>
 
-  <script src="app.js"></script>
+            <div class="menu-item">
+                <div class="item-name">Скандинавский бургер с курицей</div>
+                <div class="item-details">
+                    <span class="item-weight">286 г</span>
+                    <span class="item-price"><span class="price-from">от</span> 239 ₽</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-name">Скандинавский бургер с курицей</div>
+                <div class="item-details">
+                    <span class="item-weight">287 г</span>
+                    <span class="item-price"><span class="price-from">от</span> 239 ₽</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-name">Скандинавский бургер с курицей</div>
+                <div class="item-details">
+                    <span class="item-weight">288 г</span>
+                    <span class="item-price"><span class="price-from">от</span> 239 ₽</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-name">Скандинавский бургер с курицей</div>
+                <div class="item-details">
+                    <span class="item-weight">288 г</span>
+                    <span class="item-price"><span class="price-from">от</span> 239 ₽</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <div class="nav-buttons">
+                <button class="nav-button">Меню</button>
+                <button class="nav-button">Акции</button>
+                <button class="nav-button">Заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Добавляем интерактивность кнопкам
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.textContent;
+                alert(`Вы выбрали: ${buttonText}`);
+            });
+        });
+
+        // Добавляем возможность выбора бургера
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const itemName = this.querySelector('.item-name').textContent;
+                const itemPrice = this.querySelector('.item-price').textContent;
+                alert(`Добавлено в корзину: ${itemName} - ${itemPrice}`);
+            });
+        });
+    </script>
 </body>
 </html>
