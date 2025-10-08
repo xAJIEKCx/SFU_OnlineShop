@@ -14,3 +14,26 @@ await fetch("/api/order", {
     items: [{ product_id: 1, qty: 2 }]
   })
 })
+// Переключение категорий
+function showCategory(id) {
+  document.querySelectorAll('.category').forEach(cat => {
+    cat.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+}
+
+// Добавление в корзину
+let cart = [];
+
+function addToCart(product) {
+  cart.push(product);
+  alert(`✅ ${product} добавлен в корзину`);
+}
+
+// Отправка данных в Telegram (опционально)
+function sendOrderToTelegram() {
+  if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.sendData(JSON.stringify(cart));
+  }
+}
+
