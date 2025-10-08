@@ -1,23 +1,23 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify
 import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
 
-DB_PATH = "shop.db"  # название твоей SQLite базы
+DB_PATH = "shop.db"
 
-# 🔌 Утилита подключения к БД
+# 📦 Подключение к базе
 def get_db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
-# ✅ Главная страница (frontend)
+# 🏠 Главная страница (отдаёт index.html из templates/)
 @app.route("/")
 def index():
-    return send_from_directory("web", "index.html")
+    return render_template("index.html")
 
-# 📁 Получение всех категорий
+# 📁 Получение категорий
 @app.route("/api/categories", methods=["GET"])
 def get_categories():
     conn = get_db()
@@ -27,7 +27,7 @@ def get_categories():
     conn.close()
     return jsonify(categories)
 
-# 📦 Получение списка товаров (с фильтром по категории)
+# 📦 Получение товаров (по категории или всех)
 @app.route("/api/products", methods=["GET"])
 def get_products():
     category_id = request.args.get("category_id")
@@ -36,12 +36,12 @@ def get_products():
 
     if category_id:
         cur.execute("""
-            SELECT ID_товара, Название, Цена, Описание, Рейтинг
+            SELECT ID_товара, Название, Цена, Описание, Рейтинг 
             FROM Товар WHERE ID_категории = ?
         """, (category_id,))
     else:
         cur.execute("""
-            SELECT ID_товара, Название, Цена, Описание, Рейтинг
+            SELECT ID_товара, Название, Цена, Описание, Рейтинг 
             FROM Товар
         """)
 
@@ -49,7 +49,7 @@ def get_products():
     conn.close()
     return jsonify(products)
 
-# 👤 Регистрация пользователя при первом запуске бота
+# 👤 Регистрация пользователя
 @app.route("/api/register", methods=["POST"])
 def register_user():
     data = request.get_json()
@@ -67,12 +67,12 @@ def register_user():
 
     return jsonify({"status": "ok", "message": "Пользователь зарегистрирован"})
 
-# 🛍️ Оформление заказа
+# 🛒 Создание заказа
 @app.route("/api/order", methods=["POST"])
 def create_order():
     data = request.get_json()
     telegram_id = data.get("telegram_id")
-    items = data.get("items", [])  # [{'product_id': 1, 'qty': 2}, ...]
+    items = data.get("items", [])
 
     conn = get_db()
     cur = conn.cursor()
@@ -82,15 +82,14 @@ def create_order():
             INSERT INTO Покупка (ID_пользователя, ID_товара, Дата)
             VALUES (
                 (SELECT ID_пользователя FROM Пользователь WHERE telegram_id=?),
-                ?,
-                ?
+                ?, ?
             )
         """, (telegram_id, item["product_id"], datetime.now().isoformat()))
 
     conn.commit()
     conn.close()
 
-    return jsonify({"status": "ok", "message": "Заказ успешно оформлен"})
+    return jsonify({"status": "ok", "message": "Заказ успешно создан"})
 
 # ⭐ Оценка товара
 @app.route("/api/rate", methods=["POST"])
@@ -110,7 +109,7 @@ def rate_product():
         )
     """, (telegram_id, product_id, rating))
 
-    # 📊 Обновление среднего рейтинга товара
+    # Обновляем средний рейтинг товара
     cur.execute("""
         UPDATE Товар
         SET Рейтинг = (SELECT AVG(Оценка) FROM Оценка WHERE ID_товара = ?)
@@ -120,7 +119,7 @@ def rate_product():
     conn.commit()
     conn.close()
 
-    return jsonify({"status": "ok", "message": "Спасибо за вашу оценку!"})
+    return jsonify({"status": "ok", "message": "Спасибо за оценку!"})
 
 # 📜 История покупок пользователя
 @app.route("/api/orders/<telegram_id>", methods=["GET"])
@@ -139,6 +138,6 @@ def get_orders(telegram_id):
     conn.close()
     return jsonify(orders)
 
-# 🔥 Запуск сервера
+# 🚀 Запуск приложения
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
