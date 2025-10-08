@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Онлайн-магазин</title>
-  <link rel="stylesheet" href="web/style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
@@ -24,7 +24,7 @@
         <h2>Суши 🍣</h2>
         <div class="products">
           <div class="product-card">
-            <img src="images/sushi1.jpg" alt="Суши 1" />
+            <img src="../static/images/sushi1.jpg" alt="Суши 1" />
             <h3>Филадельфия</h3>
             <p>Креветка, сыр Cremette, огурец</p>
             <div class="price">329 ₽</div>
@@ -32,7 +32,7 @@
           </div>
 
           <div class="product-card">
-            <img src="images/sushi2.jpg" alt="Суши 2" />
+            <img src="../static/images/sushi2.jpg" alt="Суши 2" />
             <h3>Калифорния</h3>
             <p>Креветка, сыр Cremette, огурец, кунжут</p>
             <div class="price">329 ₽</div>
@@ -40,7 +40,7 @@
           </div>
 
           <div class="product-card">
-            <img src="images/sushi3.jpg" alt="Суши 3" />
+            <img src="../static/images/sushi3.jpg" alt="Суши 3" />
             <h3>Темпура ролл</h3>
             <p>Лосось, снежный краб, сыр Cremette, огурец</p>
             <div class="price">329 ₽</div>
@@ -53,7 +53,7 @@
         <h2>Пицца 🍕</h2>
         <div class="products">
           <div class="product-card">
-            <img src="images/pizza1.jpg" alt="Пицца 1" />
+            <img src="../static/images/pizza1.jpg" alt="Пицца 1" />
             <h3>4 сезона</h3>
             <p>Ветчина, колбаса салями, шампиньоны, томаты, сыр моцарелла, фирменный красный соус</p>
             <div class="price">599 ₽</div>
@@ -61,7 +61,7 @@
           </div>
 
           <div class="product-card">
-            <img src="images/pizza2.jpg" alt="Пицца 2" />
+            <img src="../static/images/pizza2.jpg" alt="Пицца 2" />
             <h3>Пепперони</h3>
             <p>Колбаса пепперони (острая), сыр моцарелла, фирменный красный соус</p>
             <div class="price">599 ₽</div>
@@ -69,7 +69,7 @@
           </div>
 
           <div class="product-card">
-            <img src="images/pizza3.jpg" alt="Пицца 3" />
+            <img src="../static/images/pizza3.jpg" alt="Пицца 3" />
             <h3>4 Сыра</h3>
             <p>Дор блю, фетакса, пармезан, моцарелла, фирменный белый соус</p>
             <div class="price">599 ₽</div>
@@ -82,7 +82,7 @@
         <h2>Напитки 🥤</h2>
         <div class="products">
           <div class="product-card">
-            <img src="images/drink1.jpg" alt="Кола" />
+            <img src="../static/images/drink1.jpg" alt="Кола" />
             <h3>Кола</h3>
             <p>0.5 л</p>
             <div class="price">120 ₽</div>
@@ -90,7 +90,7 @@
           </div>
 
           <div class="product-card">
-            <img src="images/drink2.jpg" alt="Сок" />
+            <img src="../static/images/drink2.jpg" alt="Сок" />
             <h3>Морс брусничный</h3>
             <p>0,5 л</p>
             <div class="price">150 ₽</div>
@@ -98,7 +98,7 @@
           </div>
 
           <div class="product-card">
-            <img src="images/drink3.jpg" alt="Вода" />
+            <img src="../static/images/drink3.jpg" alt="Вода" />
             <h3>Минеральная вода</h3>
             <p>0.5 л</p>
             <div class="price">100 ₽</div>
@@ -110,7 +110,7 @@
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="app.js"></script>
+  <script src="../app.js"></script>
 
 </body>
 </html>
