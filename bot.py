@@ -9,7 +9,7 @@ dp = Dispatcher()
 @dp.message(Command("start"))
 async def start(message: types.Message):
     kb = types.InlineKeyboardMarkup(
-        inline_keyboard=[  # ✅ создаём список кнопок сразу
+        inline_keyboard=[
             [
                 types.InlineKeyboardButton(
                     text="🛍️ Открыть магазин",

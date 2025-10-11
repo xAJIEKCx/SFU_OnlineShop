@@ -4,6 +4,25 @@
 let cart = []; // корзина товаров
 const tg = window.Telegram.WebApp; // объект Telegram WebApp
 
+// 📁 Выдвижное боковое меню
+function toggleMenu() {
+  const sidebar = document.getElementById("sidebar");
+  const container = document.querySelector(".container");
+  const overlay = document.getElementById("overlay");
+
+  const isOpen = sidebar.classList.toggle("open");
+  overlay.classList.toggle("active", isOpen);
+
+  // На ПК контент сдвигаем, на телефоне — нет
+  if (window.innerWidth > 768) {
+    container.classList.toggle("shifted", isOpen);
+  }
+}
+
+
+
+
+
 // ================================
 // 📁 Переключение категорий
 // ================================
